@@ -56,4 +56,4 @@ jobs:
         run: |
           DISPLAY=:99
           Xvfb :99 -screen 0 1920x1080x24 &
-          dotnet test src/UITest/UITest.csproj --verbosity normal
+          dotnet test src/UITest/UITest.csproj --verbosity normal -- -browser headless -chrome-options "--headless,--disable-gpu,--no-sandbox,--disable-dev-shm-usage"
