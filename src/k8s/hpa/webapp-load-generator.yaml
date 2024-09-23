@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-load-generator
+  namespace: pitstop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp-load-generator
+  template:
+    metadata:
+      labels:
+        app: webapp-load-generator
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do wget -q -O- http://webapp.default.svc.cluster.local; sleep 1; done"]
+        resources:
+          requests:
+            cpu: "3000m"  
+            memory: "6400Mi"
+          limits:
+            cpu: "3000m"
+            memory: "6400Mi"
