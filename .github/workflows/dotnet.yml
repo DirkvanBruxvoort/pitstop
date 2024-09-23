@@ -37,7 +37,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      # Set fixed ChromeDriver version (example: 114.0.5735.90)
+      # Set fixed ChromeDriver version
       - name: Setup ChromeDriver
         run: |
           CHROMEDRIVER_VERSION=114.0.5735.90
@@ -51,9 +51,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore src/UITest/UITest.csproj
 
-      # Run UI tests
+      # Run UI tests with runsettings
       - name: Run UI tests
         run: |
           DISPLAY=:99
           Xvfb :99 -screen 0 1920x1080x24 &
-          dotnet test src/UITest/UITest.csproj --verbosity normal -- -browser headless -chrome-options "--headless,--disable-gpu,--no-sandbox,--disable-dev-shm-usage,--user-data-dir=/tmp/chrome-user-data"
+          dotnet test src/UITest/UITest.csproj --verbosity normal --settings src/UITest/test.runsettings -- -browser headless -chrome-options "--headless,--disable-gpu,--no-sandbox,--disable-dev-shm-usage,--user-data-dir=/tmp/chrome-user-data"
