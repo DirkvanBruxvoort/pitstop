@@ -36,14 +36,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          # Get Chrome version
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
-          echo "Chrome version: $CHROME_VERSION"
 
-      # Match ChromeDriver version with Chrome version
+      # Set fixed ChromeDriver version (example: 114.0.5735.90)
       - name: Setup ChromeDriver
         run: |
-          CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
+          CHROMEDRIVER_VERSION=114.0.5735.90
           echo "Installing ChromeDriver version: $CHROMEDRIVER_VERSION"
           wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
