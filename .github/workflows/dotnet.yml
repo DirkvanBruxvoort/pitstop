@@ -17,9 +17,9 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore src
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build src --no-restore
       - name: Run unit tests
         run: dotnet test src/WorkshopManagement.UnitTests --no-build --verbosity normal
 
@@ -45,11 +45,11 @@ jobs:
 
       # Restore dependencies
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore src
 
       # Build the solution
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build src --no-restore
 
       # Run UI tests
       - name: Run UI tests
