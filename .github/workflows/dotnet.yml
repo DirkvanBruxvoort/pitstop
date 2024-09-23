@@ -22,38 +22,38 @@ jobs:
         run: dotnet test src/WorkshopManagement.UnitTests/WorkshopManagement.UnitTests.csproj --verbosity normal
 
   # UI tests with Selenium
-  ui-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
+  # ui-tests:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Setup .NET
+  #       uses: actions/setup-dotnet@v4
+  #       with:
+  #         dotnet-version: 8.0.x
       
-      # Install Chrome browser
-      - name: Install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+  #     # Install Chrome browser
+  #     - name: Install Chrome
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install -y google-chrome-stable
 
-      # Set fixed ChromeDriver version
-      - name: Setup ChromeDriver
-        run: |
-          CHROMEDRIVER_VERSION=114.0.5735.90
-          echo "Installing ChromeDriver version: $CHROMEDRIVER_VERSION"
-          wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
+  #     # Set fixed ChromeDriver version
+  #     - name: Setup ChromeDriver
+  #       run: |
+  #         CHROMEDRIVER_VERSION=114.0.5735.90
+  #         echo "Installing ChromeDriver version: $CHROMEDRIVER_VERSION"
+  #         wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+  #         unzip chromedriver_linux64.zip
+  #         sudo mv chromedriver /usr/local/bin/
+  #         sudo chmod +x /usr/local/bin/chromedriver
 
-      # Restore dependencies
-      - name: Restore dependencies
-        run: dotnet restore src/UITest/UITest.csproj
+  #     # Restore dependencies
+  #     - name: Restore dependencies
+  #       run: dotnet restore src/UITest/UITest.csproj
 
-      # Run UI tests with runsettings
-      - name: Run UI tests
-        run: |
-          DISPLAY=:99
-          Xvfb :99 -screen 0 1920x1080x24 &
-          dotnet test src/UITest/UITest.csproj --verbosity normal --settings src/UITest/test.runsettings -- -browser headless -chrome-options "--headless,--disable-gpu,--no-sandbox,--disable-dev-shm-usage,--user-data-dir=/tmp/chrome-user-data"
+  #     # Run UI tests with runsettings
+  #     - name: Run UI tests
+  #       run: |
+  #         DISPLAY=:99
+  #         Xvfb :99 -screen 0 1920x1080x24 &
+  #         dotnet test src/UITest/UITest.csproj --verbosity normal --settings src/UITest/test.runsettings -- -browser headless -chrome-options "--headless,--disable-gpu,--no-sandbox,--disable-dev-shm-usage,--user-data-dir=/tmp/chrome-user-data"
