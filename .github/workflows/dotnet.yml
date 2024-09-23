@@ -53,4 +53,7 @@ jobs:
 
       # Run UI tests
       - name: Run UI tests
-        run: dotnet test src/UITest/UITest.csproj --verbosity normal
+        run: |
+          DISPLAY=:99
+          Xvfb :99 -screen 0 1920x1080x24 &
+          dotnet test src/UITest/UITest.csproj --verbosity normal
