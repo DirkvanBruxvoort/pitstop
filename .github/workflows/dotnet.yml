@@ -39,7 +39,7 @@ jobs:
       - name: Setup ChromeDriver
         uses: nanasess/setup-chromedriver@v1
         with:
-          chrome-version: 'latest' # Match installed Chrome version
+          chromedriver-version: 'latest'
 
       # Restore dependencies
       - name: Restore dependencies
