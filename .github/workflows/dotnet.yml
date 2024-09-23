@@ -17,9 +17,9 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore src/WorkshopManagement.UnitTests/WorkshopManagement.UnitTests.csproj
       - name: Run unit tests
-        run: dotnet test src/WorkshopManagement.UnitTests --verbosity normal
+        run: dotnet test src/WorkshopManagement.UnitTests/WorkshopManagement.UnitTests.csproj --verbosity normal
 
   # UI tests with Selenium
   ui-tests:
@@ -43,8 +43,8 @@ jobs:
 
       # Restore dependencies
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore src/UITest/UITest.csproj
 
       # Run UI tests
       - name: Run UI tests
-        run: dotnet test src/UITest --verbosity normal
+        run: dotnet test src/UITest/UITest.csproj --verbosity normal
